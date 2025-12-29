@@ -1,0 +1,1 @@
+Interceptores HTTP globales.
