@@ -6,18 +6,21 @@
       </a>
       <ul class="hidden lg:flex gap-6 ml-2">
         <li [@staggerItems]="{value: '', params: {delay: 300}}">
-          <a routerLink="/menu" routerLinkActive="text-chocolate font-bold" [routerLinkActiveOptions]="{exact: false}" class="font-semibold text-gray-800 hover:text-white hover:bg-chocolate transition-all duration-300 cursor-pointer relative group px-4 py-2 rounded-lg">
+          <a routerLink="/menu" routerLinkActive="text-chocolate font-bold" [routerLinkActiveOptions]="{exact: false}" class="font-semibold text-gray-800 hover:text-amarilloMango transition-all duration-300 cursor-pointer relative group">
             Ver Menú
+            <span class="absolute bottom-0 left-0 w-0 h-1 bg-amarilloMango group-hover:w-full transition-all duration-300"></span>
           </a>
         </li>
         <li [@staggerItems]="{value: '', params: {delay: 600}}">
-          <button (click)="scrollToSection('sobre-nosotros')" class="font-semibold text-gray-800 hover:text-white hover:bg-chocolate transition-all duration-300 relative group cursor-pointer px-4 py-2 rounded-lg">
+          <button (click)="scrollToSection('sobre-nosotros')" class="font-semibold text-gray-800 hover:text-amarilloMango transition-all duration-300 relative group cursor-pointer">
             Sobre Nosotros
+            <span class="absolute bottom-0 left-0 w-0 h-1 bg-amarilloMango group-hover:w-full transition-all duration-300"></span>
           </button>
         </li>
         <li [@staggerItems]="{value: '', params: {delay: 900}}">
-          <button (click)="scrollToSection('ubicacion')" class="font-semibold text-gray-800 hover:text-white hover:bg-chocolate transition-all duration-300 relative group cursor-pointer px-4 py-2 rounded-lg">
+          <button (click)="scrollToSection('ubicacion')" class="font-semibold text-gray-800 hover:text-amarilloMango transition-all duration-300 relative group cursor-pointer">
             Ubicación
+            <span class="absolute bottom-0 left-0 w-0 h-1 bg-amarilloMango group-hover:w-full transition-all duration-300"></span>
           </button>
         </li>
       </ul>
