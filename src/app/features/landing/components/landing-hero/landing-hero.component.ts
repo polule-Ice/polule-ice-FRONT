@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'landing-hero',
@@ -26,4 +27,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class LandingHeroComponent {}
+export class LandingHeroComponent {
+  constructor(private router: Router) {}
+
+  goToMenu() {
+    this.router.navigate(['/menu']);
+  }
+}
