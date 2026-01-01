@@ -39,10 +39,10 @@ export class MenuLibroComponent {
       items: [
         { name: 'Vainilla', price: 2.50, description: 'Cono con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
         { name: 'Chocolate', price: 2.50, description: 'Cono con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
-        { name: 'Mixto', price: 3.50, description: 'Cono con helado soft cremoso sabor combinado (vainilla y chocolate)', image: '/assets/helados.jpg' },
-        { name: 'Vainilla Grande', price: 4.00, description: 'Cono grande con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
-        { name: 'Chocolate Grande', price: 4.00, description: 'Cono grande con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
-        { name: 'Mixto Grande', price: 5.00, description: 'Cono grande con helado soft cremoso sabor combinado', image: '/assets/helados.jpg' },
+        { name: 'Mixto', price: 2.50, description: 'Cono con helado soft cremoso sabor combinado (vainilla y chocolate)', image: '/assets/helados.jpg' },
+        { name: 'Super Cono Vainilla', price: 3.50, description: 'Super cono con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
+        { name: 'Super Cono Chocolate', price: 3.50, description: 'Super cono con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
+        { name: 'Super Cono Mixto', price: 3.50, description: 'Super cono con helado soft cremoso sabor combinado', image: '/assets/helados.jpg' },
       ]
     },
     {

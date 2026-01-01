@@ -16,9 +16,9 @@
         </h2>
 
         <div class="flex flex-col gap-3 sm:gap-5">
-          <div *ngFor="let item of category.items" class="cursor-pointer group" (click)="openItemDetail(item)">
+          <div *ngFor="let item of category.items" class="group">
             <div class="flex items-center justify-between mb-1">
-              <span class="font-bold text-base sm:text-lg text-chocolate group-hover:text-amarilloMango transition-colors">
+              <span class="font-bold text-base sm:text-lg text-chocolate">
                 {{ item.name }}
               </span>
               <span class="flex-1 border-b-2 border-dotted border-gray-300 mx-2 sm:mx-3 min-w-[20px]"></span>
@@ -32,8 +32,8 @@
   </div>
 </div>
 
-<!-- Modal de Detalle del Producto -->
-<div *ngIf="selectedItem" class="modal-overlay" (click)="closeItemDetail()">
+<!-- Modal de Detalle del Producto - DESHABILITADO -->
+<!-- <div *ngIf="selectedItem" class="modal-overlay" (click)="closeItemDetail()">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <button class="modal-close" (click)="closeItemDetail()">
       <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,4 +76,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
