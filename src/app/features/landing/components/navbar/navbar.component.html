@@ -6,12 +6,12 @@
       </a>
       <ul class="hidden lg:flex gap-6 ml-2 items-center">
         <li [@staggerItems]="{value: '', params: {delay: 600}}">
-          <button (click)="scrollToSection('sobre-nosotros')" class="font-semibold text-gray-800 hover:bg-amarilloMango hover:text-chocolate transition-all duration-300 cursor-pointer px-3 py-1.5 rounded-md inline-block">
+          <button (click)="scrollToSection('sobre-nosotros')" [class]="activeSection() === 'sobre-nosotros' ? 'font-semibold bg-amarilloMango text-chocolate transition-all duration-300 cursor-pointer px-3 py-1.5 rounded-md inline-block' : 'font-semibold text-gray-800 hover:bg-amarilloMango hover:text-chocolate transition-all duration-300 cursor-pointer px-3 py-1.5 rounded-md inline-block'">
             Sobre Nosotros
           </button>
         </li>
         <li [@staggerItems]="{value: '', params: {delay: 900}}">
-          <button (click)="scrollToSection('ubicacion')" class="font-semibold text-gray-800 hover:bg-amarilloMango hover:text-chocolate transition-all duration-300 cursor-pointer px-3 py-1.5 rounded-md inline-block">
+          <button (click)="scrollToSection('ubicacion')" [class]="activeSection() === 'ubicacion' ? 'font-semibold bg-amarilloMango text-chocolate transition-all duration-300 cursor-pointer px-3 py-1.5 rounded-md inline-block' : 'font-semibold text-gray-800 hover:bg-amarilloMango hover:text-chocolate transition-all duration-300 cursor-pointer px-3 py-1.5 rounded-md inline-block'">
             Ubicación
           </button>
         </li>

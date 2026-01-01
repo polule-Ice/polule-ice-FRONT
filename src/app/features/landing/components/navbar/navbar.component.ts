@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 
@@ -24,8 +24,33 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 })
 export class NavbarComponent {
   protected readonly menuOpen = signal(false);
+  protected readonly activeSection = signal<string>('');
 
   constructor(private router: Router) {}
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (this.isOnLanding()) {
+      const sections = ['sobre-nosotros', 'ubicacion'];
+      const navbarHeight = 100;
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= navbarHeight && rect.bottom >= navbarHeight) {
+            this.activeSection.set(sectionId);
+            return;
+          }
+        }
+      }
+      
+      // Si no hay ninguna sección activa, limpiar
+      if (window.scrollY < 200) {
+        this.activeSection.set('');
+      }
+    }
+  }
 
   toggleMenu() {
     this.menuOpen.set(!this.menuOpen());
@@ -36,6 +61,7 @@ export class NavbarComponent {
   }
 
   scrollToSection(sectionId: string) {
+    this.activeSection.set(sectionId);
     if (!this.isOnLanding()) {
       this.router.navigate(['/']).then(() => {
         setTimeout(() => this.scrollTo(sectionId), 100);
