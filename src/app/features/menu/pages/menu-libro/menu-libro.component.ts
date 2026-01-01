@@ -1,13 +1,34 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../../landing/components/navbar/navbar.component';
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-menu-libro',
   standalone: true,
   imports: [CommonModule, NavbarComponent],
   templateUrl: './menu-libro.component.html',
-  styleUrls: ['./menu-libro.component.css']
+  styleUrls: ['./menu-libro.component.css'],
+  animations: [
+    trigger('fallIn', [
+      transition('* => *', [
+        query(':enter', [
+          style({
+            transform: 'translateY(-100px) rotate(-15deg)',
+            opacity: 0
+          }),
+          stagger('150ms', [
+            animate('800ms cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+              style({
+                transform: 'translateY(0) rotate(0deg)',
+                opacity: 1
+              })
+            )
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class MenuLibroComponent {
   selectedItem: any = null;
