@@ -1,2 +1,7 @@
 @import '../node_modules/leaflet/dist/leaflet.css';
 @import "tailwindcss";
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
