@@ -1,15 +1,9 @@
-<section class="relative flex items-center justify-start min-h-screen w-full overflow-hidden rounded-lg shadow-lg">
-  <img src="/assets/banner-page1.jpg" alt="Helado en la playa" class="absolute inset-0 w-full h-full object-cover object-center opacity-100" style="min-width:1248px; min-height:832px;" />
-  <div class="relative z-10 flex flex-col items-start justify-center max-w-lg w-full md:w-1/2 p-8 bg-white/80 rounded-xl shadow-xl m-8 ml-4 md:ml-24 backdrop-blur-sm">
-    <h1 class="text-2xl md:text-4xl font-extrabold text-blue-900 mb-4 leading-tight drop-shadow">
-      El sabor refrescante que<br />
-      transforma tu diya
-    </h1>
-    <p class="text-base md:text-xl text-orange-700 font-semibold mb-4 drop-shadow">
-      ¡Fresursa inquigable,<br />en cacha clucharoda!
-    </p>
-    <button class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition-all">
-      ¡Pide Ahora!
-    </button>
+<div class="flex flex-col gap-8 items-center w-full">
+  <app-navbar></app-navbar>
+  <landing-hero></landing-hero>
+  <div class="w-full max-w-6xl">
+    <app-sobre-nosotros></app-sobre-nosotros>
+    <app-ubicacion-horarios></app-ubicacion-horarios>
   </div>
-</section>
+  <app-footer></app-footer>
+</div>

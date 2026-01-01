@@ -1,0 +1,19 @@
+<section id="sobre-nosotros" class="w-full flex flex-col md:flex-row items-center justify-center py-16 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 bg-white">
+  <div class="md:w-[420px] flex items-center justify-center mb-8 md:mb-0 md:mr-8" [@slideFromLeft]="isVisible() ? 'visible' : 'hidden'">
+    <img src="/assets/helados.jpg" alt="Helado artesanal" class="w-[320px] h-[320px] md:w-[380px] md:h-[380px] rounded-2xl shadow-lg object-cover" />
+  </div>
+  <div class="flex-1 flex flex-col justify-center items-start max-w-2xl" [@slideFromRight]="isVisible() ? 'visible' : 'hidden'">
+    <span class="text-lg font-semibold text-amarilloMango mb-2">Sobre Nosotros</span>
+    <h2 class="text-3xl md:text-4xl font-extrabold text-chocolate mb-4">¡Helados al estilo centro comercial,<br>con toppings irresistibles!</h2>
+    <p class="text-chocolate mb-6 max-w-xl">
+      En nuestra heladería te ofrecemos la experiencia de los helados que encuentras en centros comerciales, pero con nuestro toque especial: puedes personalizar tu cono o sundae con chips de chocolate, gomitas, galletas, salsas y mucho más. ¡Haz tu combinación favorita y disfruta un helado único en cada visita!
+    </p>
+    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-6 w-full">
+      <li class="flex items-center text-chocolate"><span class="text-amarilloMango mr-2 text-xl">✔</span> Helados tipo soft y cremosos</li>
+      <li class="flex items-center text-chocolate"><span class="text-amarilloMango mr-2 text-xl">✔</span> Toppings: chips, gomitas, galletas</li>
+      <li class="flex items-center text-chocolate"><span class="text-amarilloMango mr-2 text-xl">✔</span> Combos y presentaciones tipo sundae</li>
+      <li class="flex items-center text-chocolate"><span class="text-amarilloMango mr-2 text-xl">✔</span> Atención rápida y personalizada</li>
+    </ul>
+    <button class="bg-amarilloMango hover:bg-amarilloMango/80 text-chocolate font-bold py-2 px-6 rounded-full shadow transition">Conócenos</button>
+  </div>
+</section>

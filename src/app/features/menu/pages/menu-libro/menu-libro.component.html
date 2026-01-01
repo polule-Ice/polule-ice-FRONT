@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+<div class="min-h-screen bg-gradient-to-br from-blancoCrema via-white to-cremaVainilla py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto pt-24 pb-12">
+    <!-- Header del Menú -->
+    <div class="text-center mb-12">
+      <span class="text-lg font-semibold text-amarilloMango mb-2 block">NUESTRO MENÚ</span>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-chocolate mb-4">Helados Polule ICE</h1>
+      <p class="text-chocolate text-lg max-w-2xl mx-auto">Descubre nuestras deliciosas creaciones artesanales, personalizadas con los mejores toppings.</p>
+    </div>
+
+    <!-- Categorías del Menú -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div *ngFor="let category of categories" class="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold text-chocolate mb-6 border-b-4 border-amarilloMango pb-3">
+          {{ category.title }}
+        </h2>
+
+        <div class="flex flex-col gap-5">
+          <div *ngFor="let item of category.items" class="cursor-pointer group" (click)="openItemDetail(item)">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-lg text-chocolate group-hover:text-amarilloMango transition-colors">
+                {{ item.name }}
+              </span>
+              <span class="flex-1 border-b-2 border-dotted border-gray-300 mx-3 min-w-[20px]"></span>
+              <span class="text-amarilloMango font-bold text-xl">S/ {{ item.price.toFixed(2) }}</span>
+            </div>
+            <p class="text-gray-600 text-sm pl-0">{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de Contacto -->
+    <div class="flex justify-center mt-12">
+      <button class="bg-amarilloMango hover:bg-amarilloMango/80 text-chocolate font-bold py-4 px-10 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-lg">
+        Hacer un Pedido
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Detalle del Producto -->
+<div *ngIf="selectedItem" class="modal-overlay" (click)="closeItemDetail()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeItemDetail()">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="modal-body">
+      <div class="modal-image-container">
+        <img [src]="selectedItem.image" [alt]="selectedItem.name" class="modal-image">
+      </div>
+
+      <div class="modal-details">
+        <h3 class="modal-title">{{ selectedItem.name }}</h3>
+        <div class="modal-price-badge">
+          S/ {{ selectedItem.price.toFixed(2) }}
+        </div>
+        <p class="modal-description">{{ selectedItem.description }}</p>
+
+        <div class="modal-info">
+          <div class="info-item">
+            <svg class="w-5 h-5 text-amarilloMango" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>100% Natural</span>
+          </div>
+          <div class="info-item">
+            <svg class="w-5 h-5 text-amarilloMango" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Preparado al momento</span>
+          </div>
+          <div class="info-item">
+            <svg class="w-5 h-5 text-amarilloMango" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+            <span>Hecho con amor</span>
+          </div>
+        </div>
+
+        <button class="modal-order-btn" (click)="closeItemDetail()">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          Agregar al Pedido
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
