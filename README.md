@@ -1,59 +1,112 @@
-# PoluleIceFRONT
+# Polule ICE - Landing Page 🍦
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.3.
+Sitio web oficial de Polule ICE, heladería artesanal con helados tipo soft cremosos y toppings personalizables.
 
-## Development server
+## 🚀 Características
 
-To start a local development server, run:
+- 🎨 Landing page moderna y atractiva
+- 📱 Diseño 100% responsive
+- 🍦 Menú interactivo con categorías
+- 📍 Mapa de ubicación integrado
+- 💬 WhatsApp directo para pedidos
+- ⚡ Optimizado para despliegue en Netlify
 
-```bash
-ng serve
-```
+## 🛠️ Tecnologías
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Angular 20** - Framework principal
+- **Tailwind CSS** - Estilos y diseño
+- **TypeScript** - Lenguaje de programación
+- **Leaflet** - Mapas interactivos
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Instalación
 
 ```bash
-ng generate --help
+# Clonar el repositorio
+git clone https://github.com/polule-Ice/polule-ice-FRONT.git
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm start
 ```
 
-## Building
+El sitio estará disponible en `http://localhost:4200/`
 
-To build the project run:
+## 🏗️ Build
 
 ```bash
-ng build
+# Build de producción
+npm run build
+
+# Build específico para Netlify
+npm run build:netlify
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🌐 Despliegue en Netlify
 
-## Running unit tests
+El proyecto está configurado para despliegue automático en Netlify:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. Conecta tu repositorio en [netlify.com](https://netlify.com)
+2. Netlify detectará automáticamente la configuración desde `netlify.toml`
+3. El sitio se desplegará automáticamente con cada push a `main`
+
+Ver [DEPLOY.md](DEPLOY.md) para más detalles.
+
+## 📂 Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── features/
+│   │   ├── landing/        # Página principal
+│   │   │   ├── components/ # Componentes de landing
+│   │   │   └── pages/      # Landing page
+│   │   └── menu/          # Página del menú
+│   │       └── pages/     # Menú interactivo
+│   ├── shared/            # Componentes compartidos
+│   │   └── components/
+│   │       └── footer/    # Footer global
+│   └── environments/      # Configuración de entornos
+├── assets/                # Imágenes y recursos
+└── styles/               # Estilos globales
+```
+
+## 🎨 Paleta de Colores
+
+- **Chocolate**: `#8B4513` - Color principal
+- **Amarillo Mango**: `#FFB84D` - Acentos
+- **Blanco Crema**: `#FFF8E7` - Fondos
+- **Azul Hielo**: `#B8E6F0` - Detalles
+
+## 📝 Scripts Disponibles
 
 ```bash
-ng test
+npm start          # Servidor de desarrollo
+npm run build      # Build de producción
+npm run watch      # Build con watch mode
+npm test           # Ejecutar tests
 ```
 
-## Running end-to-end tests
+## 🤝 Contribuir
 
-For end-to-end (e2e) testing, run:
+Las contribuciones son bienvenidas. Por favor:
 
-```bash
-ng e2e
-```
+1. Fork el proyecto
+2. Crea tu rama (`git checkout -b feature/nueva-caracteristica`)
+3. Commit tus cambios (`git commit -m 'Agregar nueva característica'`)
+4. Push a la rama (`git push origin feature/nueva-caracteristica`)
+5. Abre un Pull Request
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📞 Contacto
 
-## Additional Resources
+- **WhatsApp**: +51 970 473 404
+- **Instagram**: [@polule_ice](https://instagram.com/polule_ice)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📄 Licencia
+
+Este proyecto es privado y pertenece a Polule ICE.
+
+---
+
+Desarrollado con ❤️ para Polule ICE 🍦
