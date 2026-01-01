@@ -48,10 +48,10 @@ export class MenuLibroComponent {
     {
       title: 'Vasitos Sundae',
       items: [
-        { name: 'Sundae de Chocolate', price: 6.50, description: 'Vasito con helado soft, crema de chocolate y toppings', image: '/assets/helados.jpg' },
-        { name: 'Sundae de Fresa', price: 6.50, description: 'Vasito con helado soft, crema de fresa y toppings', image: '/assets/helados.jpg' },
-        { name: 'Sundae de Caramelo', price: 6.50, description: 'Vasito con helado soft, crema de caramelo y toppings', image: '/assets/helados.jpg' },
-        { name: 'Sundae Oreo', price: 7.50, description: 'Vasito con helado soft, galletas Oreo trituradas y crema', image: '/assets/helados.jpg' },
+        { name: 'Sundae de Chocolate', price: 6.50, description: 'Vasito con helado soft, crema de chocolate y 2 toppings a elección', image: '/assets/helados.jpg' },
+        { name: 'Sundae de Fresa', price: 6.50, description: 'Vasito con helado soft, crema de fresa y 2 toppings a elección', image: '/assets/helados.jpg' },
+        { name: 'Sundae de Caramelo', price: 6.50, description: 'Vasito con helado soft, crema de caramelo y 2 toppings a elección', image: '/assets/helados.jpg' },
+        { name: 'Sundae Oreo', price: 7.50, description: 'Vasito con helado soft, galletas Oreo trituradas, crema y 2 toppings a elección', image: '/assets/helados.jpg' },
       ]
     },
     {
