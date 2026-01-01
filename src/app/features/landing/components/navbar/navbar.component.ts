@@ -33,7 +33,7 @@ export class NavbarComponent {
     if (this.isOnLanding()) {
       const sections = ['sobre-nosotros', 'ubicacion'];
       const navbarHeight = 100;
-      
+
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -44,7 +44,7 @@ export class NavbarComponent {
           }
         }
       }
-      
+
       // Si no hay ninguna sección activa, limpiar
       if (window.scrollY < 200) {
         this.activeSection.set('');
