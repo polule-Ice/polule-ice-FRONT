@@ -37,12 +37,12 @@ export class MenuLibroComponent {
     {
       title: 'Conos Helado Soft',
       items: [
-        { name: 'Cono Vainilla', price: 2.50, description: 'Cono con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
-        { name: 'Cono Chocolate', price: 2.50, description: 'Cono con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
-        { name: 'Cono Mixto', price: 3.50, description: 'Cono con helado soft cremoso sabor combinado (vainilla y chocolate)', image: '/assets/helados.jpg' },
-        { name: 'Super Cono Vainilla', price: 4.00, description: 'Cono grande con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
-        { name: 'Super Cono Chocolate', price: 4.00, description: 'Cono grande con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
-        { name: 'Super Cono Mixto', price: 5.00, description: 'Cono grande con helado soft cremoso sabor combinado', image: '/assets/helados.jpg' },
+        { name: 'Vainilla', price: 2.50, description: 'Cono con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
+        { name: 'Chocolate', price: 2.50, description: 'Cono con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
+        { name: 'Mixto', price: 3.50, description: 'Cono con helado soft cremoso sabor combinado (vainilla y chocolate)', image: '/assets/helados.jpg' },
+        { name: 'Vainilla Grande', price: 4.00, description: 'Cono grande con helado soft cremoso sabor vainilla', image: '/assets/helados.jpg' },
+        { name: 'Chocolate Grande', price: 4.00, description: 'Cono grande con helado soft cremoso sabor chocolate', image: '/assets/helados.jpg' },
+        { name: 'Mixto Grande', price: 5.00, description: 'Cono grande con helado soft cremoso sabor combinado', image: '/assets/helados.jpg' },
       ]
     },
     {
@@ -65,14 +65,6 @@ export class MenuLibroComponent {
         { name: 'Galleta Triturada', price: 1.00, description: 'Galletas dulces finamente trituradas', image: '/assets/helados.jpg' },
         { name: 'Maní Garrapiñado', price: 1.00, description: 'Maní caramelizado crujiente', image: '/assets/helados.jpg' },
         { name: 'Sprinkles de Colores', price: 1.00, description: 'Grageas de colores brillantes', image: '/assets/helados.jpg' },
-      ]
-    },
-    {
-      title: 'Especiales',
-      items: [
-        { name: 'Milkshake', price: 7.00, description: 'Batido cremoso con helado soft, sabor a elección', image: '/assets/helados.jpg' },
-        { name: 'Banana Split', price: 9.00, description: 'Plátano con helado soft, 3 cremas y toppings', image: '/assets/helados.jpg' },
-        { name: 'Copa Familiar', price: 15.00, description: 'Para compartir: helado soft abundante con 5 toppings', image: '/assets/helados.jpg' },
       ]
     }
   ];
