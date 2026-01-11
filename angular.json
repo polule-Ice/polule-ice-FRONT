@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "polule_ice-FRONT": {
+    "polule_ice-CLIENT": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -36,7 +36,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/polule-ice-front",
+            "outputPath": "dist/polule-ice-client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -82,10 +82,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "polule_ice-FRONT:build:production"
+              "buildTarget": "polule_ice-CLIENT:build:production"
             },
             "development": {
-              "buildTarget": "polule_ice-FRONT:build:development"
+              "buildTarget": "polule_ice-CLIENT:build:development"
             }
           },
           "defaultConfiguration": "development"

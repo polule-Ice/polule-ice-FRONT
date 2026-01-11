@@ -1,0 +1,246 @@
+<div class="min-h-screen bg-gradient-to-br from-blancoCrema to-cremaVainilla text-gray-900">
+  <div class="max-w-[1600px] mx-auto p-4">
+    <!-- Date Selector -->
+    <div class="bg-white rounded-xl shadow-lg p-4 mb-4">
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <h2 class="text-xl font-bold text-chocolate flex items-center gap-2">
+          📅 <span>Seleccionar Fecha</span>
+        </h2>
+        <div class="flex items-center gap-4">
+          <label class="text-chocolate font-medium">Fecha:</label>
+          <input
+            type="date"
+            [(ngModel)]="selectedDate"
+            (change)="onDateChange()"
+            class="border-2 border-amarilloMango/30 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amarilloMango focus:border-amarilloMango transition-all cursor-pointer"
+          >
+          <button
+            (click)="exportData()"
+            class="bg-amarilloMango text-chocolate px-4 py-2 rounded-lg font-semibold hover:bg-yellow-400 transition-colors shadow-md cursor-pointer flex items-center gap-2"
+            title="Exportar datos"
+          >
+            📁 <span>Exportar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    @if (dailySummary()) {
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <!-- Total Sales -->
+        <div class="bg-gradient-to-r from-white to-amarilloMango/10 rounded-lg shadow-lg p-4 hover:shadow-xl transition-all">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-chocolate/70 text-xs font-medium uppercase tracking-wide">Total Ventas</p>
+              <p class="text-2xl font-bold text-chocolate mt-0.5">{{ dailySummary()!.totalSales }}</p>
+            </div>
+            <div class="bg-amarilloMango p-3 rounded-lg shadow-md">
+              <svg class="w-5 h-5 text-chocolate" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total Amount -->
+        <div class="bg-gradient-to-r from-white to-green-50 rounded-lg shadow-lg p-4 hover:shadow-xl transition-all">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-green-700 text-xs font-medium uppercase tracking-wide">Monto Total</p>
+              <p class="text-2xl font-bold text-green-600 mt-0.5">S/ {{ dailySummary()!.totalAmount.toFixed(2) }}</p>
+            </div>
+            <div class="bg-green-500 p-3 rounded-lg shadow-md">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cash Sales -->
+        <div class="bg-gradient-to-r from-white to-blue-50 rounded-lg shadow-lg p-4 hover:shadow-xl transition-all">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-blue-700 text-xs font-medium uppercase tracking-wide">Ventas Efectivo</p>
+              <p class="text-2xl font-bold text-blue-600 mt-0.5">S/ {{ dailySummary()!.salesByPaymentMethod.efectivo.toFixed(2) }}</p>
+            </div>
+            <div class="bg-blue-500 p-3 rounded-lg shadow-md">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Digital Sales -->
+        <div class="bg-gradient-to-r from-white to-purple-50 rounded-lg shadow-lg p-4 hover:shadow-xl transition-all">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-purple-700 text-xs font-medium uppercase tracking-wide">Ventas Digitales</p>
+              <p class="text-2xl font-bold text-purple-600 mt-0.5">S/ {{ (dailySummary()!.salesByPaymentMethod.tarjeta + dailySummary()!.salesByPaymentMethod.yape + dailySummary()!.salesByPaymentMethod.plin).toFixed(2) }}</p>
+            </div>
+            <div class="bg-purple-500 p-3 rounded-lg shadow-md">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <!-- Payment Methods Breakdown -->
+      @if (dailySummary()) {
+        <div class="bg-white rounded-lg shadow-lg p-4">
+          <h3 class="text-lg font-bold text-chocolate mb-3 flex items-center gap-2">
+            💳 <span>Métodos de Pago</span>
+          </h3>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center p-3 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg hover:shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">💵</span>
+                <span class="font-semibold text-blue-800 text-sm">Efectivo</span>
+              </div>
+              <span class="font-bold text-blue-700">S/ {{ dailySummary()!.salesByPaymentMethod.efectivo.toFixed(2) }}</span>
+            </div>
+
+            <div class="flex justify-between items-center p-3 bg-gradient-to-r from-green-50 to-green-100 rounded-lg hover:shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">💳</span>
+                <span class="font-semibold text-green-800 text-sm">Tarjeta</span>
+              </div>
+              <span class="font-bold text-green-700">S/ {{ dailySummary()!.salesByPaymentMethod.tarjeta.toFixed(2) }}</span>
+            </div>
+
+            <div class="flex justify-between items-center p-3 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg hover:shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">📱</span>
+                <span class="font-semibold text-yellow-800 text-sm">Yape</span>
+              </div>
+              <span class="font-bold text-yellow-700">S/ {{ dailySummary()!.salesByPaymentMethod.yape.toFixed(2) }}</span>
+            </div>
+
+            <div class="flex justify-between items-center p-3 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg hover:shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">💰</span>
+                <span class="font-semibold text-purple-800 text-sm">Plin</span>
+              </div>
+              <span class="font-bold text-purple-700">S/ {{ dailySummary()!.salesByPaymentMethod.plin.toFixed(2) }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Top Selling Flavors -->
+      @if (dailySummary() && dailySummary()!.topSellingFlavors.length > 0) {
+        <div class="bg-white rounded-lg shadow-lg p-4">
+          <h3 class="text-lg font-bold text-chocolate mb-3 flex items-center gap-2">
+            🍦 <span>Sabores Más Vendidos</span>
+          </h3>
+          <div class="space-y-2">
+            @for (flavor of dailySummary()!.topSellingFlavors; track flavor.flavor; let i = $index) {
+              <div class="flex justify-between items-center p-3 bg-gradient-to-r from-amarilloMango/20 to-cremaVainilla/30 rounded-lg hover:shadow-md transition-all">
+                <div class="flex items-center gap-3">
+                  <span class="w-7 h-7 bg-amarilloMango text-chocolate rounded-full flex items-center justify-center text-xs font-bold shadow-md">{{ i + 1 }}</span>
+                  <span class="font-semibold text-chocolate">{{ flavor.flavor }}</span>
+                </div>
+                <span class="font-bold text-chocolate bg-white px-2 py-1 rounded-full shadow-sm text-sm">{{ flavor.quantity }} uni</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Sales History -->
+    <div class="bg-white rounded-lg shadow-lg p-4 mt-4">
+      <h3 class="text-lg font-bold text-chocolate mb-4 flex items-center gap-2">
+        📋 <span>Historial de Ventas - {{ selectedDate() | date:'dd/MM/yyyy' }}</span>
+      </h3>
+
+      @if (filteredSales().length === 0) {
+        <div class="text-center py-12">
+          <div class="bg-gradient-to-b from-amarilloMango/20 to-cremaVainilla/20 rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+            <svg class="w-12 h-12 text-chocolate/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <p class="text-chocolate/70 text-lg font-medium">No hay ventas registradas para esta fecha</p>
+          <p class="text-chocolate/50 text-sm mt-2">Selecciona una fecha diferente para ver las ventas</p>
+        </div>
+      } @else {
+        <div class="overflow-x-auto rounded-lg">
+          <table class="w-full text-sm">
+            <thead class="bg-gradient-to-r from-amarilloMango/80 to-amarilloMango">
+              <tr>
+                <th class="px-4 py-3 text-left font-bold text-chocolate">Ticket</th>
+                <th class="px-4 py-3 text-left font-bold text-chocolate">Hora</th>
+                <th class="px-4 py-3 text-left font-bold text-chocolate">Cliente</th>
+                <th class="px-4 py-3 text-left font-bold text-chocolate">Items</th>
+                <th class="px-4 py-3 text-left font-bold text-chocolate">Pago</th>
+                <th class="px-4 py-3 text-left font-bold text-chocolate">Total</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white">
+              @for (sale of filteredSales(); track sale.id) {
+                <tr class="border-b border-amarilloMango/10 hover:bg-amarilloMango/5 transition-colors">
+                  <td class="px-4 py-3 font-bold text-chocolate">{{ sale.saleNumber }}</td>
+                  <td class="px-4 py-3 text-chocolate/70 font-medium">{{ sale.date | date:'HH:mm' }}</td>
+                  <td class="px-4 py-3 text-chocolate/70">{{ sale.customerName || 'Cliente general' }}</td>
+                  <td class="px-4 py-3 text-chocolate/70">
+                    <span class="bg-amarilloMango/20 text-chocolate px-2 py-1 rounded-full text-xs font-medium">
+                      {{ sale.items.length }} items
+                    </span>
+                  </td>
+                  <td class="px-4 py-3">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold shadow-sm"
+                          [class.bg-blue-100]="sale.paymentMethod === 'efectivo'"
+                          [class.text-blue-800]="sale.paymentMethod === 'efectivo'"
+                          [class.bg-green-100]="sale.paymentMethod === 'tarjeta'"
+                          [class.text-green-800]="sale.paymentMethod === 'tarjeta'"
+                          [class.bg-yellow-100]="sale.paymentMethod === 'yape'"
+                          [class.text-yellow-800]="sale.paymentMethod === 'yape'"
+                          [class.bg-purple-100]="sale.paymentMethod === 'plin'"
+                          [class.text-purple-800]="sale.paymentMethod === 'plin'">
+                      {{ getPaymentMethodName(sale.paymentMethod) }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 font-bold text-green-600">S/ {{ sale.total.toFixed(2) }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+
+    <!-- Overall Statistics -->
+    <div class="bg-gradient-to-r from-white to-amarilloMango/10 rounded-lg shadow-lg p-4 mt-4">
+      <h3 class="text-lg font-bold text-chocolate mb-3 flex items-center gap-2">
+        📈 <span>Estadísticas Generales</span>
+      </h3>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="text-center p-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all">
+          <div class="bg-chocolate text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2 text-lg font-bold shadow-lg">
+            {{ allSales().length }}
+          </div>
+          <p class="text-chocolate font-semibold text-xs">Total de ventas registradas</p>
+        </div>
+        <div class="text-center p-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all">
+          <div class="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2 text-sm font-bold shadow-lg">
+            S/ {{ getTotalSalesAmount().toFixed(0) }}
+          </div>
+          <p class="text-green-600 font-semibold text-xs">Monto total vendido</p>
+        </div>
+        <div class="text-center p-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-all">
+          <div class="bg-amarilloMango text-chocolate rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2 text-lg font-bold shadow-lg">
+            {{ todaySales().length }}
+          </div>
+          <p class="text-chocolate font-semibold text-xs">Ventas de hoy</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

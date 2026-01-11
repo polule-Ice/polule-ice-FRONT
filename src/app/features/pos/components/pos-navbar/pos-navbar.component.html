@@ -1,0 +1,82 @@
+<nav class="bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+
+      <!-- Logo y título -->
+      <div class="flex items-center">
+        <div class="flex-shrink-0 flex items-center">
+          <span class="text-2xl">🍦</span>
+          <h1 class="ml-2 text-xl font-bold text-chocolate">Polule ICE - POS</h1>
+        </div>
+        <div class="ml-6 text-sm text-chocolate/70 font-medium">
+          Terminal de Ventas
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="flex items-center space-x-4">
+
+        <!-- Terminal Button -->
+        <button
+          (click)="goToTerminal()"
+          class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-chocolate hover:bg-amarilloMango hover:text-chocolate transition-colors border border-transparent"
+          [class.bg-amarilloMango]="router.url.includes('/pos/terminal')"
+          [class.border-chocolate]="router.url.includes('/pos/terminal')"
+          [class.font-semibold]="router.url.includes('/pos/terminal')"
+        >
+          🛒 Terminal
+        </button>
+
+        <!-- Reports Button -->
+        <button
+          (click)="goToReports()"
+          class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-chocolate hover:bg-amarilloMango hover:text-chocolate transition-colors border border-transparent"
+          [class.bg-amarilloMango]="router.url.includes('/pos/reports')"
+          [class.border-chocolate]="router.url.includes('/pos/reports')"
+          [class.font-semibold]="router.url.includes('/pos/reports')"
+        >
+          📊 Reportes
+        </button>
+
+        <!-- Current Sale Info -->
+        @if (posService.currentSaleItemCount() > 0) {
+          <div class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
+            {{ posService.currentSaleItemCount() }} items - S/ {{ posService.currentSaleTotal().toFixed(2) }}
+          </div>
+        }
+
+        <!-- Action Buttons -->
+        <div class="flex items-center space-x-2 ml-4 pl-4">
+
+          <!-- New Sale -->
+          <button
+            (click)="newSale()"
+            class="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors shadow-md"
+            title="Nueva venta"
+          >
+            🆕 Nueva Venta
+          </button>
+
+          <!-- Back to Shop -->
+          <button
+            (click)="goToShop()"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors shadow-md"
+            title="Volver a la tienda"
+          >
+            🏪 Tienda
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sale Status Bar -->
+  @if (posService.currentSaleItemCount() > 0) {
+    <div class="bg-amarilloMango text-chocolate px-4 py-2">
+      <div class="max-w-7xl mx-auto flex justify-between items-center text-sm font-semibold">
+        <span>Venta en progreso: {{ posService.currentSaleItemCount() }} productos</span>
+        <span>Total: S/ {{ posService.currentSaleTotal().toFixed(2) }}</span>
+      </div>
+    </div>
+  }
+</nav>

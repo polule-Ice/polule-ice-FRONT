@@ -1,0 +1,135 @@
+<div class="min-h-screen bg-gradient-to-b from-blancoCrema to-white">
+  <!-- POS Navbar -->
+  <app-pos-navbar></app-pos-navbar>
+
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-chocolate mb-6">
+        🍦 ¡Bienvenido a nuestra Tienda! 🍦
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+        Descubre los helados más deliciosos hechos con amor y los mejores ingredientes
+      </p>
+
+      <!-- Search Bar -->
+      <div class="max-w-md mx-auto mb-12">
+        <div class="relative">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+            placeholder="Buscar helados, paletas, sundaes..."
+            class="w-full px-4 py-3 pl-10 pr-4 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-amarilloMango focus:border-transparent"
+          >
+          <svg class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Filter -->
+  <section class="pb-8 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <button
+          (click)="filterByCategory(null)"
+          [class]="selectedCategory() === null ?
+            'bg-amarilloMango text-chocolate font-semibold' :
+            'bg-white text-gray-700 hover:bg-gray-50'"
+          class="px-6 py-2 rounded-full border border-gray-200 transition-colors duration-200"
+        >
+          Todos
+        </button>
+        <button
+          (click)="filterByCategory('helados')"
+          [class]="selectedCategory() === 'helados' ?
+            'bg-amarilloMango text-chocolate font-semibold' :
+            'bg-white text-gray-700 hover:bg-gray-50'"
+          class="px-6 py-2 rounded-full border border-gray-200 transition-colors duration-200"
+        >
+          🍨 Helados
+        </button>
+        <button
+          (click)="filterByCategory('paletas')"
+          [class]="selectedCategory() === 'paletas' ?
+            'bg-amarilloMango text-chocolate font-semibold' :
+            'bg-white text-gray-700 hover:bg-gray-50'"
+          class="px-6 py-2 rounded-full border border-gray-200 transition-colors duration-200"
+        >
+          🍭 Paletas
+        </button>
+        <button
+          (click)="filterByCategory('sundaes')"
+          [class]="selectedCategory() === 'sundaes' ?
+            'bg-amarilloMango text-chocolate font-semibold' :
+            'bg-white text-gray-700 hover:bg-gray-50'"
+          class="px-6 py-2 rounded-full border border-gray-200 transition-colors duration-200"
+        >
+          🍧 Sundaes
+        </button>
+        <button
+          (click)="filterByCategory('bebidas')"
+          [class]="selectedCategory() === 'bebidas' ?
+            'bg-amarilloMango text-chocolate font-semibold' :
+            'bg-white text-gray-700 hover:bg-gray-50'"
+          class="px-6 py-2 rounded-full border border-gray-200 transition-colors duration-200"
+        >
+          🥤 Bebidas
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="pb-16 px-4">
+    <div class="max-w-7xl mx-auto">
+      @if (productService.loading()) {
+        <div class="text-center py-16">
+          <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amarilloMango"></div>
+          <p class="mt-4 text-gray-600">Cargando deliciosos productos...</p>
+        </div>
+      } @else if (filteredProducts().length === 0) {
+        <div class="text-center py-16">
+          <svg class="mx-auto h-24 w-24 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <p class="mt-4 text-xl text-gray-600">No se encontraron productos</p>
+          <p class="text-gray-500">Intenta cambiar los filtros o buscar algo diferente</p>
+        </div>
+      } @else {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          @for (product of filteredProducts(); track product.id) {
+            <app-product-card
+              [product]="product"
+              (addToCart)="handleAddToCart($event)"
+              (viewDetails)="viewProductDetails($event)"
+            ></app-product-card>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Floating Cart Button -->
+  @if (!cartService.isEmpty()) {
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        (click)="goToCart()"
+        class="bg-chocolate hover:bg-chocolate/90 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 relative"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293A1 1 0 005 16v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 00-.293-.707L17 13M7 13v5a2 2 0 002 2h6a2 2 0 002-2v-5"></path>
+        </svg>
+        <span class="absolute -top-2 -right-2 bg-amarilloMango text-chocolate text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center">
+          {{ cartService.cartSummary().itemCount }}
+        </span>
+      </button>
+    </div>
+  }
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>

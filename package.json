@@ -1,5 +1,5 @@
 {
-  "name": "polule-ice-front",
+  "name": "polule-ice-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,7 @@
     "build:netlify": "ng build --configuration production --base-href /",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:polule_ice-FRONT": "node dist/polule_ice-FRONT/server/server.mjs"
+    "serve:ssr:polule_ice-CLIENT": "node dist/polule_ice-CLIENT/server/server.mjs"
   },
   "prettier": {
     "overrides": [

@@ -1,0 +1,147 @@
+<div class="min-h-screen bg-gradient-to-b from-blancoCrema to-white">
+  <!-- POS Navbar -->
+  <app-pos-navbar></app-pos-navbar>
+
+  <!-- Cart Content -->
+  <div class="pt-24 pb-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-bold text-chocolate mb-4">🛒 Tu Carrito</h1>
+        <p class="text-gray-600">Revisa y confirma tu pedido</p>
+      </div>
+
+      @if (cartService.isEmpty()) {
+        <!-- Empty Cart -->
+        <div class="text-center py-16">
+          <svg class="mx-auto h-24 w-24 text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293A1 1 0 005 16v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 00-.293-.707L17 13M7 13v5a2 2 0 002 2h6a2 2 0 002-2v-5"></path>
+          </svg>
+          <h3 class="text-xl font-semibold text-gray-600 mb-4">Tu carrito está vacío</h3>
+          <p class="text-gray-500 mb-6">¡Agrega algunos deliciosos helados para comenzar!</p>
+          <a routerLink="/shop" class="bg-amarilloMango hover:bg-yellow-400 text-chocolate font-semibold py-3 px-6 rounded-lg transition-colors duration-200 inline-block">
+            Ir a la Tienda
+          </a>
+        </div>
+      } @else {
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Cart Items -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+              <h2 class="text-xl font-bold text-chocolate mb-6">Productos en tu carrito</h2>
+
+              @for (item of cartService.cartItems(); track item.id) {
+                <div class="flex items-center gap-4 py-4 border-b border-gray-200 last:border-b-0">
+                  <!-- Product Image -->
+                  <img
+                    [src]="item.product.image"
+                    [alt]="item.product.name"
+                    class="w-16 h-16 object-cover rounded-lg"
+                    (error)="onImageError($event)"
+                  >
+
+                  <!-- Product Info -->
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-chocolate">{{ item.product.name }}</h3>
+                    @if (item.selectedSize) {
+                      <p class="text-sm text-gray-600">Tamaño: {{ item.selectedSize.name }}</p>
+                    }
+                    @if (item.selectedFlavor) {
+                      <p class="text-sm text-gray-600">Sabor: {{ item.selectedFlavor }}</p>
+                    }
+                  </div>
+
+                  <!-- Quantity Controls -->
+                  <div class="flex items-center gap-2">
+                    <button
+                      (click)="updateQuantity(item.id, item.quantity - 1)"
+                      class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                      </svg>
+                    </button>
+                    <span class="w-8 text-center font-semibold">{{ item.quantity }}</span>
+                    <button
+                      (click)="updateQuantity(item.id, item.quantity + 1)"
+                      class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Price -->
+                  <div class="text-right">
+                    <p class="font-semibold text-chocolate">S/ {{ item.totalPrice.toFixed(2) }}</p>
+                  </div>
+
+                  <!-- Remove Button -->
+                  <button
+                    (click)="removeItem(item.id)"
+                    class="text-red-500 hover:text-red-700 p-1 rounded transition-colors duration-200"
+                    title="Eliminar producto"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="lg:col-span-1">
+            <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+              <h2 class="text-xl font-bold text-chocolate mb-6">Resumen del pedido</h2>
+
+              <div class="space-y-4 mb-6">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Subtotal:</span>
+                  <span class="font-semibold">S/ {{ cartService.cartSummary().subtotal.toFixed(2) }}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Delivery:</span>
+                  <span class="font-semibold">S/ {{ cartService.cartSummary().delivery.toFixed(2) }}</span>
+                </div>
+                <div class="border-t border-gray-200 pt-4">
+                  <div class="flex justify-between text-lg">
+                    <span class="font-bold text-chocolate">Total:</span>
+                    <span class="font-bold text-chocolate">S/ {{ cartService.cartSummary().total.toFixed(2) }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="space-y-3">
+                <button
+                  (click)="proceedToCheckout()"
+                  class="w-full bg-amarilloMango hover:bg-yellow-400 text-chocolate font-bold py-3 px-4 rounded-lg transition-colors duration-200"
+                >
+                  Proceder al Pago
+                </button>
+                <a
+                  routerLink="/shop"
+                  class="w-full block text-center bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
+                >
+                  Seguir Comprando
+                </a>
+                <button
+                  (click)="clearCart()"
+                  class="w-full text-red-500 hover:text-red-700 font-medium py-2 transition-colors duration-200"
+                >
+                  Vaciar Carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>

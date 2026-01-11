@@ -1,0 +1,26 @@
+<div class="min-h-screen bg-gradient-to-br from-blancoCrema to-cremaVainilla">
+  <div class="max-w-7xl mx-auto p-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Product Selection -->
+      <div class="lg:col-span-2">
+        <app-product-selector
+          [products]="products()"
+          (productAdded)="onProductAdded($event)">
+        </app-product-selector>
+      </div>
+
+      <!-- Current Sale -->
+      <div class="lg:col-span-1">
+        <app-current-sale
+          [items]="posService.currentSale()"
+          [total]="getTotal()"
+          [totalItems]="posService.currentSaleItemCount()"
+          (removeItem)="removeFromSale($event)"
+          (updateQuantity)="updateQuantity($event)"
+          (proceedToPayment)="openPaymentModal()">
+        </app-current-sale>
+      </div>
+    </div>
+  </div>
+</div>

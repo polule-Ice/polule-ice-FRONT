@@ -1,0 +1,195 @@
+<div class="min-h-screen bg-gradient-to-b from-blancoCrema to-white">
+  <!-- POS Navbar -->
+  <app-pos-navbar></app-pos-navbar>
+
+  <div class="pt-24 pb-16 px-4">
+    @if (product()) {
+      <div class="max-w-6xl mx-auto">
+        <!-- Breadcrumb -->
+        <nav class="mb-8">
+          <ol class="flex items-center space-x-2 text-sm text-gray-600">
+            <li><a routerLink="/shop" class="hover:text-chocolate">Tienda</a></li>
+            <li><span>/</span></li>
+            <li class="text-chocolate">{{ product()!.name }}</li>
+          </ol>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Product Image -->
+          <div class="space-y-4">
+            <div class="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden">
+              <img
+                [src]="product()!.image"
+                [alt]="product()!.name"
+                class="w-full h-full object-cover"
+                (error)="onImageError($event)"
+              >
+            </div>
+          </div>
+
+          <!-- Product Details -->
+          <div class="space-y-6">
+            <div>
+              <h1 class="text-3xl md:text-4xl font-bold text-chocolate mb-4">
+                {{ product()!.name }}
+              </h1>
+              <p class="text-lg text-gray-600 mb-4">
+                {{ product()!.description }}
+              </p>
+
+              <!-- Rating -->
+              @if (product()!.rating) {
+                <div class="flex items-center gap-2 mb-4">
+                  <div class="flex">
+                    @for (star of [1,2,3,4,5]; track star) {
+                      <svg
+                        class="w-5 h-5"
+                        [class.text-yellow-400]="star <= product()!.rating!"
+                        [class.text-gray-300]="star > product()!.rating!"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    }
+                  </div>
+                  <span class="text-gray-600">({{ product()!.rating }}/5)</span>
+                </div>
+              }
+            </div>
+
+            <!-- Price -->
+            <div class="mb-6">
+              @if (product()!.sizes && product()!.sizes!.length > 1) {
+                <p class="text-gray-600 mb-2">Precio desde:</p>
+                <p class="text-3xl font-bold text-chocolate">S/ {{ getMinPrice() }}</p>
+              } @else {
+                <p class="text-3xl font-bold text-chocolate">S/ {{ product()!.price.toFixed(2) }}</p>
+              }
+            </div>
+
+            <!-- Size Selection -->
+            @if (product()!.sizes && product()!.sizes!.length > 1) {
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-chocolate mb-3">Selecciona el tamaño:</h3>
+                <div class="grid grid-cols-1 gap-3">
+                  @for (size of product()!.sizes!; track size.name) {
+                    <button
+                      (click)="selectedSize.set(size)"
+                      [class]="selectedSize() === size ?
+                        'border-amarilloMango bg-amarilloMango/10' :
+                        'border-gray-200 hover:border-gray-300'"
+                      class="border-2 rounded-lg p-4 text-left transition-colors duration-200"
+                    >
+                      <div class="flex justify-between items-center">
+                        <div>
+                          <p class="font-semibold text-chocolate">{{ size.name }}</p>
+                          <p class="text-sm text-gray-600">{{ size.volume }}</p>
+                        </div>
+                        <p class="text-lg font-bold text-chocolate">S/ {{ size.price.toFixed(2) }}</p>
+                      </div>
+                    </button>
+                  }
+                </div>
+              </div>
+            }
+
+            <!-- Quantity -->
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-chocolate mb-3">Cantidad:</h3>
+              <div class="flex items-center gap-3">
+                <button
+                  (click)="updateQuantity(quantity() - 1)"
+                  [disabled]="quantity() <= 1"
+                  class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center transition-colors duration-200"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                  </svg>
+                </button>
+                <span class="text-xl font-semibold text-chocolate min-w-[3rem] text-center">{{ quantity() }}</span>
+                <button
+                  (click)="updateQuantity(quantity() + 1)"
+                  class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Total Price -->
+            <div class="mb-8 p-4 bg-amarilloMango/10 rounded-lg">
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold text-chocolate">Total:</span>
+                <span class="text-2xl font-bold text-chocolate">S/ {{ getTotalPrice() }}</span>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="space-y-4">
+              @if (product()!.inStock) {
+                <button
+                  (click)="addToCart()"
+                  class="w-full bg-amarilloMango hover:bg-yellow-400 text-chocolate font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293A1 1 0 005 16v3a1 1 0 001 1h12a1 1 0 001-1v-3a1 1 0 00-.293-.707L17 13M7 13v5a2 2 0 002 2h6a2 2 0 002-2v-5"></path>
+                  </svg>
+                  Agregar al Carrito
+                </button>
+              } @else {
+                <button
+                  disabled
+                  class="w-full bg-gray-300 text-gray-500 font-bold py-4 px-6 rounded-lg cursor-not-allowed"
+                >
+                  Producto Agotado
+                </button>
+              }
+
+              <a
+                routerLink="/shop"
+                class="w-full block text-center bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700 font-semibold py-4 px-6 rounded-lg transition-colors duration-200"
+              >
+                Volver a la Tienda
+              </a>
+            </div>
+
+            <!-- Ingredients -->
+            @if (product()!.ingredients && product()!.ingredients!.length > 0) {
+              <div class="mt-8 p-4 bg-white rounded-lg shadow-sm">
+                <h3 class="text-lg font-semibold text-chocolate mb-3">Ingredientes:</h3>
+                <div class="flex flex-wrap gap-2">
+                  @for (ingredient of product()!.ingredients!; track ingredient) {
+                    <span class="bg-gray-100 text-gray-700 text-sm px-3 py-1 rounded-full">
+                      {{ ingredient }}
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    } @else {
+      <!-- Product not found -->
+      <div class="max-w-2xl mx-auto text-center py-16">
+        <svg class="mx-auto h-24 w-24 text-gray-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <h2 class="text-2xl font-bold text-chocolate mb-4">Producto no encontrado</h2>
+        <p class="text-gray-600 mb-6">Lo sentimos, el producto que buscas no está disponible.</p>
+        <a
+          routerLink="/shop"
+          class="bg-amarilloMango hover:bg-yellow-400 text-chocolate font-semibold py-3 px-6 rounded-lg transition-colors duration-200 inline-block"
+        >
+          Volver a la Tienda
+        </a>
+      </div>
+    }
+  </div>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>

@@ -1,6 +1,7 @@
 import { Component, signal, HostListener } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,7 +27,10 @@ export class NavbarComponent {
   protected readonly menuOpen = signal(false);
   protected readonly activeSection = signal<string>('');
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    protected authService: AuthService
+  ) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -84,5 +88,31 @@ export class NavbarComponent {
         behavior: 'smooth'
       });
     }
+  }
+
+  // Login related methods
+  navigateToLogin(): void {
+    this.router.navigate(['/auth/login']);
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
+  getUserName(): string {
+    const user = this.authService.currentUser();
+    return user ? user.name : '';
+  }
+
+  getUserInitials(): string {
+    const user = this.authService.currentUser();
+    if (user) {
+      const names = user.name.split(' ');
+      if (names.length >= 2) {
+        return `${names[0][0]}${names[1][0]}`.toUpperCase();
+      }
+      return user.name.charAt(0).toUpperCase();
+    }
+    return '';
   }
 }

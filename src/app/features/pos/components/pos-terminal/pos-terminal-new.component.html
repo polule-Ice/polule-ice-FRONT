@@ -1,0 +1,229 @@
+<div class="min-h-screen bg-gradient-to-b from-blancoCrema to-white">
+  <!-- Header -->
+  <header class="bg-chocolate text-white p-4 shadow-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold">🍦 Polule ICE - Terminal de Ventas</h1>
+        <p class="text-amarilloMango">Empleado: {{ posService.getEmployeeName() }}</p>
+      </div>
+      <div class="flex gap-4">
+        <button
+          (click)="goToReports()"
+          class="bg-amarilloMango text-chocolate px-4 py-2 rounded-lg hover:bg-yellow-400 transition-colors font-semibold"
+        >
+          📊 Reportes
+        </button>
+        <button
+          (click)="newSale()"
+          class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-semibold"
+        >
+          🆕 Nueva Venta
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto p-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Product Selection -->
+      <div class="lg:col-span-2">
+        <app-product-selector
+          [products]="products()"
+          (productAdded)="onProductAdded($event)">
+        </app-product-selector>
+      </div>
+
+      <!-- Current Sale -->
+      <div class="lg:col-span-1">
+        <app-current-sale
+          [items]="posService.currentSale()"
+          [total]="getTotal()"
+          [totalItems]="posService.currentSaleItemCount()"
+          (removeItem)="removeFromSale($event)"
+          (updateQuantity)="updateQuantity($event.id, $event.quantity)"
+          (proceedToPayment)="openPaymentModal()">
+        </app-current-sale>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  @if (showPaymentModal()) {
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+        <h2 class="text-xl font-bold text-chocolate mb-4">Procesar Pago</h2>
+
+        <div class="mb-4">
+          <div class="flex justify-between text-lg font-semibold">
+            <span>Total a pagar:</span>
+            <span class="text-chocolate">S/ {{ getTotal().toFixed(2) }}</span>
+          </div>
+        </div>
+
+        <!-- Customer Name -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del cliente (opcional)</label>
+          <input
+            type="text"
+            [(ngModel)]="customerName"
+            placeholder="Nombre del cliente"
+            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amarilloMango"
+          >
+        </div>
+
+        <!-- Payment Method -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Método de pago</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button
+              (click)="paymentMethod.set('efectivo')"
+              class="p-3 border rounded-lg font-semibold transition-colors"
+              [class.border-amarilloMango]="paymentMethod() === 'efectivo'"
+              [class.bg-amarilloMango/10]="paymentMethod() === 'efectivo'"
+            >
+              💵 Efectivo
+            </button>
+            <button
+              (click)="paymentMethod.set('tarjeta')"
+              class="p-3 border rounded-lg font-semibold transition-colors"
+              [class.border-amarilloMango]="paymentMethod() === 'tarjeta'"
+              [class.bg-amarilloMango/10]="paymentMethod() === 'tarjeta'"
+            >
+              💳 Tarjeta
+            </button>
+            <button
+              (click)="paymentMethod.set('yape')"
+              class="p-3 border rounded-lg font-semibold transition-colors"
+              [class.border-amarilloMango]="paymentMethod() === 'yape'"
+              [class.bg-amarilloMango/10]="paymentMethod() === 'yape'"
+            >
+              📱 Yape
+            </button>
+            <button
+              (click)="paymentMethod.set('plin')"
+              class="p-3 border rounded-lg font-semibold transition-colors"
+              [class.border-amarilloMango]="paymentMethod() === 'plin'"
+              [class.bg-amarilloMango/10]="paymentMethod() === 'plin'"
+            >
+              💰 Plin
+            </button>
+          </div>
+        </div>
+
+        <!-- Cash Input -->
+        @if (paymentMethod() === 'efectivo') {
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Monto recibido</label>
+            <input
+              type="number"
+              [(ngModel)]="cashReceived"
+              [min]="getTotal()"
+              step="0.01"
+              placeholder="0.00"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amarilloMango"
+            >
+            @if (getChange() > 0) {
+              <p class="text-sm text-green-600 mt-1">Vuelto: S/ {{ getChange().toFixed(2) }}</p>
+            }
+          </div>
+        }
+
+        <!-- Buttons -->
+        <div class="flex gap-3">
+          <button
+            (click)="closePaymentModal()"
+            class="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg font-semibold hover:bg-gray-400 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            (click)="completeSale()"
+            class="flex-1 bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+          >
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Receipt Modal -->
+  @if (showReceiptModal() && lastSale()) {
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+        <div class="text-center mb-4">
+          <h2 class="text-xl font-bold text-chocolate">✅ Venta Completada</h2>
+          <p class="text-green-600 font-semibold">{{ lastSale().saleNumber }}</p>
+        </div>
+
+        <!-- Receipt Preview -->
+        <div id="receipt" class="border border-gray-300 p-4 bg-gray-50 text-sm">
+          <div class="text-center mb-3">
+            <h3 class="font-bold">🍦 POLULE ICE</h3>
+            <p>{{ lastSale().date | date:'dd/MM/yyyy HH:mm' }}</p>
+            <p>Ticket: {{ lastSale().saleNumber }}</p>
+          </div>
+
+          <div class="border-t border-b border-gray-400 py-2 mb-2">
+            @for (item of lastSale().items; track item.id) {
+              <div class="flex justify-between mb-1">
+                <div class="flex-1">
+                  <p class="font-medium">{{ item.productName }}</p>
+                  <p class="text-xs text-gray-600">{{ item.flavor }} - {{ item.size }}</p>
+                  <p class="text-xs">{{ item.quantity }} x S/ {{ item.unitPrice.toFixed(2) }}</p>
+                </div>
+                <p class="font-medium">S/ {{ item.totalPrice.toFixed(2) }}</p>
+              </div>
+            }
+          </div>
+
+          <div class="mb-2">
+            <div class="flex justify-between">
+              <span>Subtotal:</span>
+              <span>S/ {{ lastSale().subtotal.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between">
+              <span>IGV (18%):</span>
+              <span>S/ {{ lastSale().tax.toFixed(2) }}</span>
+            </div>
+            <div class="flex justify-between font-bold border-t border-gray-400 pt-1">
+              <span>TOTAL:</span>
+              <span>S/ {{ lastSale().total.toFixed(2) }}</span>
+            </div>
+          </div>
+
+          <div class="text-center border-t border-gray-400 pt-2">
+            <p class="text-xs">Método: {{ lastSale().paymentMethod.toUpperCase() }}</p>
+            @if (lastSale().cashReceived) {
+              <p class="text-xs">Recibido: S/ {{ lastSale().cashReceived.toFixed(2) }}</p>
+              @if (lastSale().change && lastSale().change > 0) {
+                <p class="text-xs">Vuelto: S/ {{ lastSale().change.toFixed(2) }}</p>
+              }
+            }
+            @if (lastSale().customerName) {
+              <p class="text-xs">Cliente: {{ lastSale().customerName }}</p>
+            }
+            <p class="text-xs mt-1">¡Gracias por su compra! 🍦</p>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex gap-3 mt-4">
+          <button
+            (click)="printReceipt()"
+            class="flex-1 bg-amarilloMango text-chocolate py-2 rounded-lg font-semibold hover:bg-yellow-400 transition-colors"
+          >
+            🖨️ Imprimir
+          </button>
+          <button
+            (click)="newSale()"
+            class="flex-1 bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+          >
+            Nueva Venta
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

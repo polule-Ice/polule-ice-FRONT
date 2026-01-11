@@ -10,6 +10,7 @@ module.exports = {
         cremaVainilla: '#F2E8D5',
         chocolate: '#5A3A29',
         rosaHelado: '#F38BA0',
+        amarilloMango: '#FFD54F',
       },
     },
   },

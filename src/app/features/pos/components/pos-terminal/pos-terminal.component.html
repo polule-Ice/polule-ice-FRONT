@@ -1,0 +1,33 @@
+<div class="bg-gradient-to-br from-blancoCrema to-cremaVainilla p-5">
+  <div class="max-w-[1600px] mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-10 gap-5">
+
+      <!-- Product Selection -->
+      <div class="lg:col-span-7">
+        @if (products().length > 0) {
+          <app-product-selector
+            [products]="products()"
+            (productAdded)="onProductAdded($event)">
+          </app-product-selector>
+        } @else {
+          <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-amarilloMango mx-auto mb-4"></div>
+            <p class="text-gray-500">Cargando productos...</p>
+          </div>
+        }
+      </div>
+
+      <!-- Current Sale -->
+      <div class="lg:col-span-3">
+        <app-current-sale
+          [items]="posService.currentSale()"
+          [total]="getTotal()"
+          [totalItems]="posService.currentSaleItemCount()"
+          (removeItem)="removeFromSale($event)"
+          (updateQuantity)="updateQuantity($event)"
+          (proceedToPayment)="openPaymentModal()"
+          (cancelSale)="cancelSale()">
+        </app-current-sale>
+      </div>
+    </div>
+  </div>
