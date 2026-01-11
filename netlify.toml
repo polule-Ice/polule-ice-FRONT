@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = "dist/polule-ice-front/browser"
+  publish = "dist/polule-ice-client/browser"
 
 [build.environment]
   NODE_VERSION = "20"
