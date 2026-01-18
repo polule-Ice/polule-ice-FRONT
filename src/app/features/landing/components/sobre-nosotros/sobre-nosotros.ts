@@ -7,14 +7,14 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
   templateUrl: './sobre-nosotros.html',
   animations: [
     trigger('slideFromLeft', [
-      state('hidden', style({ transform: 'translateX(-500px)', opacity: 0 })),
+      state('hidden', style({ transform: 'translateX(-50px)', opacity: 0 })),
       state('visible', style({ transform: 'translateX(0)', opacity: 1 })),
-      transition('hidden => visible', animate('1200ms cubic-bezier(0.4, 0, 0.2, 1)'))
+      transition('hidden => visible', animate('0.7s ease-out'))
     ]),
     trigger('slideFromRight', [
-      state('hidden', style({ transform: 'translateX(500px)', opacity: 0 })),
+      state('hidden', style({ transform: 'translateX(50px)', opacity: 0 })),
       state('visible', style({ transform: 'translateX(0)', opacity: 1 })),
-      transition('hidden => visible', animate('1200ms cubic-bezier(0.4, 0, 0.2, 1)'))
+      transition('hidden => visible', animate('0.7s ease-out'))
     ])
   ]
 })

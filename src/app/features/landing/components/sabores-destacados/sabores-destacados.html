@@ -1,7 +1,7 @@
 <section class="w-full flex flex-col items-center justify-center py-16 bg-white">
 	<div class="max-w-7xl w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
 		<!-- Encabezado de sección -->
-		<div class="text-center mb-12">
+		<div class="text-center mb-12" [@fadeInUp]="isVisible() ? 'visible' : 'hidden'">
 			<span class="text-base font-semibold text-cyan-600 mb-2 block">NUESTROS FAVORITOS</span>
 			<h2 class="text-4xl md:text-5xl font-extrabold text-chocolate mb-3">Sabores Más Populares</h2>
 			<p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -10,7 +10,7 @@
 		</div>
 
 		<!-- Grid de sabores -->
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8" [@fadeInUp]="isVisible() ? 'visible' : 'hidden'">
 			<!-- Vainilla -->
 			<div class="bg-gradient-to-br from-yellow-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col items-center text-center group hover:-translate-y-2">
 				<div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
@@ -58,7 +58,7 @@
 		</div>
 
 		<!-- Combinados especiales -->
-		<div class="bg-purple-100 rounded-2xl p-8 text-center border-2 border-purple-200">
+		<div class="bg-purple-100 rounded-2xl p-8 text-center border-2 border-purple-200" [@fadeInUp]="isVisible() ? 'visible' : 'hidden'">
 			<h3 class="text-2xl font-bold text-chocolate mb-3">
 				💡 ¿Sabías que puedes combinar sabores?
 			</h3>
