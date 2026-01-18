@@ -4,6 +4,10 @@ import { LandingHeroComponent } from '../components/landing-hero/landing-hero.co
 import { UbicacionHorarios } from '../components/ubicacion-horarios/ubicacion-horarios';
 import { SobreNosotros } from '../components/sobre-nosotros/sobre-nosotros';
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
+import { PromoLaunch } from '../components/promo-launch/promo-launch';
+import { SaboresDestacados } from '../components/sabores-destacados/sabores-destacados';
+import { CartaCatalogo } from '../components/carta-catalogo/carta-catalogo';
+import { ComoComprar } from '../components/como-comprar/como-comprar';
 
 @Component({
   selector: 'app-landing',
@@ -11,8 +15,11 @@ import { FooterComponent } from '../../../shared/components/footer/footer.compon
   imports: [
     NavbarComponent,
     LandingHeroComponent,
-    UbicacionHorarios,
+    PromoLaunch,
+    SaboresDestacados,
+    ComoComprar,
     SobreNosotros,
+    UbicacionHorarios,
     FooterComponent,
   ],
   templateUrl: './landing.component.html',

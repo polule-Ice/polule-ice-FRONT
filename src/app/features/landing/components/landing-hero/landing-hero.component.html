@@ -1,43 +1,64 @@
 <!-- Hero Section -->
-<section id="inicio" class="relative w-full min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 bg-white">
+<section id="inicio" class="relative w-full min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 pt-20 sm:pt-24 md:pt-28 pb-8 sm:pb-12 bg-cyan-50 overflow-hidden">
+  <!-- Badge de Promoción -->
+  <div class="mb-3 sm:mb-4" [@fadeIn]="{value: '', params: {delay: 0}}">
+    <span class="inline-flex items-center px-4 py-2 rounded-full bg-cyan-600 text-white text-xs sm:text-sm font-bold shadow-lg">
+      🎉 ¡GRAN INAUGURACIÓN en Puerto Malabrigo! Acumula tickets y gana helados gratis 🎉
+    </span>
+  </div>
+
   <!-- Titular -->
   <div class="text-center mb-4 sm:mb-6 md:mb-8 px-2">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-2 sm:mb-3 leading-tight" [@slideUpTitle]>
-      Los Mejores Helados
-      <span class="relative inline-block text-azulHielo font-bold mt-1 sm:mt-2">
+    <div class="mb-2">
+      <span class="text-sm sm:text-base md:text-lg font-semibold text-cyan-600">POLULE ICE • PUERTO MALABRIGO</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-3 sm:mb-4 leading-tight" [@slideUpTitle]>
+      Los Mejores Helados Tipo Soft
+      <span class="relative text-azulHielo font-bold mt-1 sm:mt-2 block">
         de Puerto Malabrigo
         <svg class="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3" viewBox="0 0 200 10" preserveAspectRatio="none">
           <path d="M0,5 Q50,0 100,5 T200,5" stroke="#2F80ED" stroke-width="3" fill="none" stroke-linecap="round"/>
         </svg>
       </span>
     </h1>
-    <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6 max-w-xs sm:max-w-md md:max-w-2xl mx-auto px-2" [@fadeIn]="{value: '', params: {delay: 200}}">
-      Helados cremosos y refrescantes que endulzan cada momento de tu día
+    <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 mb-2 max-w-xs sm:max-w-md md:max-w-3xl mx-auto px-2 font-medium" [@fadeIn]="{value: '', params: {delay: 200}}">
+      La experiencia de heladerías de centros comerciales, ahora en tu ciudad
     </p>
-    <button (click)="goToMenu()" class="bg-[#FF4081] hover:bg-[#E91E63] text-white font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base rounded-full transition-colors duration-300 shadow-lg hover:shadow-xl cursor-pointer" [@fadeIn]="{value: '', params: {delay: 400}}">
-      Ver Sabores
-    </button>
+    <p class="text-xs sm:text-sm md:text-base text-gray-600 mb-4 sm:mb-6 max-w-xs sm:max-w-md md:max-w-2xl mx-auto px-2" [@fadeIn]="{value: '', params: {delay: 300}}">
+      ✨ Con Toppings Ilimitados: Chips • Gomitas • Galletas • Salsas y más ✨
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center" [@fadeIn]="{value: '', params: {delay: 400}}">
+      <button (click)="goToMenu()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base rounded-full transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 cursor-pointer">
+        🍦 Ver Menú Completo
+      </button>
+      <button (click)="scrollToUbicacion()" class="bg-white hover:bg-gray-50 text-gray-800 font-semibold px-8 sm:px-10 py-3 sm:py-4 text-sm sm:text-base rounded-full transition-all duration-300 shadow-lg hover:shadow-xl border-2 border-gray-200 cursor-pointer">
+        📍 ¿Cómo llegar?
+      </button>
+    </div>
   </div>
 
-  <div class="w-full flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 lg:gap-8 items-end mt-4 sm:mt-6 md:mt-8 px-2">
-    <!-- Card 1 - Cyan Vibrante -->
-    <div class="flex-1 min-w-[200px] sm:min-w-[220px] md:min-w-[250px] max-w-[280px] sm:max-w-[300px] md:max-w-[320px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] xl:h-[450px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-8 sm:mb-12 md:mb-16 lg:mb-20 bg-cyan-300 flex items-center justify-center p-3 sm:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 200}}">
-      <img src="/assets/helados.jpg" alt="Helado" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
-    </div>
+  <!-- Contenedor con max-width para evitar overflow -->
+  <div class="w-full max-w-7xl mx-auto">
+    <div class="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 items-end mt-4 sm:mt-6 md:mt-8 px-2">
+      <!-- Card 1 - Cyan Vibrante -->
+      <div class="w-[calc(25%-0.5rem)] sm:w-[calc(25%-0.75rem)] md:w-[calc(25%-1rem)] lg:w-[calc(25%-1.5rem)] min-w-[150px] max-w-[250px] h-[220px] sm:h-[280px] md:h-[320px] lg:h-[380px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-6 sm:mb-10 md:mb-14 lg:mb-20 bg-cyan-300 flex items-center justify-center p-2 sm:p-3 md:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 200}}">
+        <img src="/assets/helados.jpg" alt="Helado de Puerto Malabrigo" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
+      </div>
 
-    <!-- Card 2 - Rosa Fucsia -->
-    <div class="flex-1 min-w-[200px] sm:min-w-[220px] md:min-w-[250px] max-w-[280px] sm:max-w-[300px] md:max-w-[320px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] xl:h-[450px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-4 sm:mb-6 md:mb-8 lg:mb-10 bg-pink-400 flex items-center justify-center p-3 sm:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 400}}">
-      <img src="/assets/helados.jpg" alt="Helado" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
-    </div>
+      <!-- Card 2 - Rosa Fucsia -->
+      <div class="w-[calc(25%-0.5rem)] sm:w-[calc(25%-0.75rem)] md:w-[calc(25%-1rem)] lg:w-[calc(25%-1.5rem)] min-w-[150px] max-w-[250px] h-[220px] sm:h-[280px] md:h-[320px] lg:h-[380px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-3 sm:mb-5 md:mb-7 lg:mb-10 bg-pink-400 flex items-center justify-center p-2 sm:p-3 md:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 400}}">
+        <img src="/assets/helados.jpg" alt="Helado Polule ICE" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
+      </div>
 
-    <!-- Card 3 - Amarillo Vibrante -->
-    <div class="flex-1 min-w-[200px] sm:min-w-[220px] md:min-w-[250px] max-w-[280px] sm:max-w-[300px] md:max-w-[320px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] xl:h-[450px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-6 sm:mb-9 md:mb-12 lg:mb-16 bg-yellow-300 flex items-center justify-center p-3 sm:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 600}}">
-      <img src="/assets/helados.jpg" alt="Helado" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
-    </div>
+      <!-- Card 3 - Amarillo Vibrante -->
+      <div class="w-[calc(25%-0.5rem)] sm:w-[calc(25%-0.75rem)] md:w-[calc(25%-1rem)] lg:w-[calc(25%-1.5rem)] min-w-[150px] max-w-[250px] h-[220px] sm:h-[280px] md:h-[320px] lg:h-[380px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-4 sm:mb-7 md:mb-10 lg:mb-16 bg-yellow-300 flex items-center justify-center p-2 sm:p-3 md:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 600}}">
+        <img src="/assets/helados.jpg" alt="Helado cremoso" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
+      </div>
 
-    <!-- Card 4 - Lavanda Vibrante -->
-    <div class="flex-1 min-w-[200px] sm:min-w-[220px] md:min-w-[250px] max-w-[280px] sm:max-w-[300px] md:max-w-[320px] h-[280px] sm:h-[320px] md:h-[380px] lg:h-[420px] xl:h-[450px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-2 sm:mb-4 bg-purple-300 flex items-center justify-center p-3 sm:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 800}}">
-      <img src="/assets/helados.jpg" alt="Helado" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
+      <!-- Card 4 - Lavanda Vibrante -->
+      <div class="w-[calc(25%-0.5rem)] sm:w-[calc(25%-0.75rem)] md:w-[calc(25%-1rem)] lg:w-[calc(25%-1.5rem)] min-w-[150px] max-w-[250px] h-[220px] sm:h-[280px] md:h-[320px] lg:h-[380px] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-transform duration-300 mb-2 sm:mb-3 md:mb-4 bg-purple-300 flex items-center justify-center p-2 sm:p-3 md:p-4" [@slideUp]="{value: '', params: {duration: 1000, delay: 800}}">
+        <img src="/assets/helados.jpg" alt="Helado tipo soft" class="w-auto h-[90%] object-contain drop-shadow-2xl" />
+      </div>
     </div>
   </div>
 </section>

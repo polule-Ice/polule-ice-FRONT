@@ -33,4 +33,11 @@ export class LandingHeroComponent {
   goToMenu() {
     this.router.navigate(['/menu']);
   }
+
+  scrollToUbicacion() {
+    const element = document.getElementById('ubicacion');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

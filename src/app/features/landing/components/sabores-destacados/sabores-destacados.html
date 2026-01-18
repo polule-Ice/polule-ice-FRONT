@@ -1,21 +1,74 @@
-<section class="w-full flex flex-col items-center justify-center py-12 bg-blancoCrema">
-	<div class="max-w-5xl w-full">
-		<h2 class="text-3xl font-bold text-chocolate mb-8 text-center">Sabores Destacados</h2>
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-			<div class="bg-white rounded-xl shadow p-6 flex flex-col items-center">
-				<img src="/assets/sabor-vainilla.png" alt="Vainilla" class="w-20 h-20 mb-4" />
-				<h3 class="font-bold text-lg text-azulHielo mb-2">Vainilla</h3>
-				<p class="text-chocolate text-center">Clásico y cremoso, el favorito de todos.</p>
+<section class="w-full flex flex-col items-center justify-center py-16 bg-white">
+	<div class="max-w-7xl w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+		<!-- Encabezado de sección -->
+		<div class="text-center mb-12">
+			<span class="text-base font-semibold text-cyan-600 mb-2 block">NUESTROS FAVORITOS</span>
+			<h2 class="text-4xl md:text-5xl font-extrabold text-chocolate mb-3">Sabores Más Populares</h2>
+			<p class="text-gray-600 text-lg max-w-2xl mx-auto">
+				Descubre los sabores que nuestros clientes aman. Todos hechos con ingredientes de calidad.
+			</p>
+		</div>
+
+		<!-- Grid de sabores -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8">
+			<!-- Vainilla -->
+			<div class="bg-gradient-to-br from-yellow-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col items-center text-center group hover:-translate-y-2">
+				<div class="w-24 h-24 bg-yellow-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+					<span class="text-5xl">🍦</span>
+				</div>
+				<h3 class="font-bold text-2xl text-chocolate mb-2">Vainilla Cremosa</h3>
+				<p class="text-gray-600 mb-4 flex-grow">
+					Clásico atemporal. Suave, cremoso y perfecto para combinar con cualquier topping.
+				</p>
+				<div class="flex items-center gap-1 text-yellow-500">
+					<span>⭐⭐⭐⭐⭐</span>
+				</div>
+				<p class="text-xs text-gray-500 mt-1">El favorito de todos</p>
 			</div>
-			<div class="bg-white rounded-xl shadow p-6 flex flex-col items-center">
-				<img src="/assets/sabor-chocolate.png" alt="Chocolate" class="w-20 h-20 mb-4" />
-				<h3 class="font-bold text-lg text-azulHielo mb-2">Chocolate</h3>
-				<p class="text-chocolate text-center">Intenso y delicioso, para los amantes del cacao.</p>
+
+			<!-- Chocolate -->
+			<div class="bg-gradient-to-br from-orange-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col items-center text-center group hover:-translate-y-2">
+				<div class="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+					<span class="text-5xl">🍫</span>
+				</div>
+				<h3 class="font-bold text-2xl text-chocolate mb-2">Chocolate Intenso</h3>
+				<p class="text-gray-600 mb-4 flex-grow">
+					Rico y profundo. Elaborado con cacao premium para los verdaderos amantes del chocolate.
+				</p>
+				<div class="flex items-center gap-1 text-yellow-500">
+					<span>⭐⭐⭐⭐⭐</span>
+				</div>
+				<p class="text-xs text-gray-500 mt-1">Irresistible</p>
 			</div>
-			<div class="bg-white rounded-xl shadow p-6 flex flex-col items-center">
-				<img src="/assets/sabor-fresa.png" alt="Fresa" class="w-20 h-20 mb-4" />
-				<h3 class="font-bold text-lg text-azulHielo mb-2">Fresa</h3>
-				<p class="text-chocolate text-center">Refrescante y natural, hecho con fruta real.</p>
+
+			<!-- Fresa -->
+			<div class="bg-gradient-to-br from-pink-50 to-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col items-center text-center group hover:-translate-y-2">
+				<div class="w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+					<span class="text-5xl">🍓</span>
+				</div>
+				<h3 class="font-bold text-2xl text-chocolate mb-2">Fresa Natural</h3>
+				<p class="text-gray-600 mb-4 flex-grow">
+					Refrescante y frutal. Hecho con fresas reales para un sabor auténtico y delicioso.
+				</p>
+				<div class="flex items-center gap-1 text-yellow-500">
+					<span>⭐⭐⭐⭐⭐</span>
+				</div>
+				<p class="text-xs text-gray-500 mt-1">100% natural</p>
+			</div>
+		</div>
+
+		<!-- Combinados especiales -->
+		<div class="bg-purple-100 rounded-2xl p-8 text-center border-2 border-purple-200">
+			<h3 class="text-2xl font-bold text-chocolate mb-3">
+				💡 ¿Sabías que puedes combinar sabores?
+			</h3>
+			<p class="text-gray-700 text-lg mb-4">
+				¡Crea tu combinación perfecta! Mezcla vainilla con chocolate, fresa con vainilla, o los tres juntos.
+			</p>
+			<div class="flex flex-wrap justify-center gap-2">
+				<span class="bg-white px-4 py-2 rounded-full text-sm font-semibold shadow">Vainilla + Chocolate</span>
+				<span class="bg-white px-4 py-2 rounded-full text-sm font-semibold shadow">Fresa + Vainilla</span>
+				<span class="bg-white px-4 py-2 rounded-full text-sm font-semibold shadow">Triple Sabor</span>
 			</div>
 		</div>
 	</div>
